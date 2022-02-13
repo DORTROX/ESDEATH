@@ -1,7 +1,7 @@
 import requests
 
 
-TDMB = '5530a3d535b08f8b492482744a2806fb'
+TDMB = 'API KEY' #Get your own api key https://www.themoviedb.org/
 
 def find_my_ip():
     ip_address = requests.get('https://api64.ipify.org?format=json').json()
