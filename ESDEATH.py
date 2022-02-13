@@ -86,7 +86,7 @@ if __name__ == "__main__":
         elif "who created you" in query:
             speak("I was created by Dortrox, for educational and for his personal uses.")
         
-        elif "mark" in query:
+        elif "esdeath" in query:
             speak("At your service sir")
 
         elif 'wikipedia' in query:
@@ -143,14 +143,14 @@ if __name__ == "__main__":
             codePath = "C:\\Users\\Baali\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
 
-        elif 'turn off yourself' in query:
+        elif 'turn off' in query:
             speak("Thanks you for using esdeath Sir")
             exit()
-        elif 'shutdown' in query:
+        elif 'shutdown laptop' in query:
             speak("Hope you have a good day sir")
-            speak("Shutting down your pc")
+            speak("Shutting down your laptop")
             os.system("shutdown /s /t 1")
-        elif 'close edge' in query:
+        elif 'close edge' in query: #DONT JUDGE MOMENT
             speak("Closing edge")
             os.system("taskkill /f /im msedge.exe")
         elif 'save file' in query:
