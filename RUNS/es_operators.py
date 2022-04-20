@@ -1,5 +1,4 @@
-import requests
-
+import requests, wikipedia
 
 TDMB = 'API KEY' #Get your own api key https://www.themoviedb.org/
 
@@ -15,3 +14,14 @@ def get_trending_movies():
     for r in results:
         trending_movies.append(r["original_title"])
     return trending_movies[:5]
+
+def wikipediaa(query, sentencess):
+    try:
+        query = query.replace("wikipedia", "")
+        results =  wikipedia.summary(query, sentences = sentencess)
+        output = f"Wikipedia says, {results}"
+        print(results)
+        return output
+    except wikipedia.exceptions.PageError as e:
+        x = query.split(' wikipedia')
+        print(f'No result found about {x}')

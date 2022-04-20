@@ -1,27 +1,27 @@
-import os
-import pyttsx3 #pip install pyttsx3
-import datetime
-import pyperclip
-import wikipedia # pip install wikipedia
-import webbrowser
-import speech_recognition as sr #pip install speechRecognition
+import os, pyttsx3, datetime, pyperclip, webbrowser, json, re
+from googlesearch import search
+import speech_recognition as sr
 from random import choice
-from RUNS.os_operaters import open_calculator, open_camera, open_cmd, open_notepad
-from RUNS.es_operators import find_my_ip, get_trending_movies
+from RUNS.os_operators import *
+from RUNS.es_operators import *
+from RUNS.math import *
 
+#Defining Config
+Obj = open('config.json')
+data = json.load(Obj)
+Browser = data['Browser']
+Owner = data['Owner']
+stack_path = data['stack_path']
+music_path = data['music_path']
 
 #Defining browser
+edge_path = Browser
+webbrowser.register('browcli', None,webbrowser.BackgroundBrowser(edge_path))
+webbrowser.get('browcli')
 
-chrome_path = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
-webbrowser.get('chrome')
 
 #Defining some important vars
-
-USER = 'DORTROX'
-BOT = 'ESDEATH'
 GreetingPro = ['How can i help you today?', 'How can i assist you?']
-summ = 0
 from openings import opening_text
 
 engine = pyttsx3.init('sapi5')
@@ -47,7 +47,7 @@ def wishMe():
     else:
         timing = 'Good Evening'
 
-    speak(timing + ' ' +USER)
+    speak(f"{timing} {Owner}")
 
 def takeCommand():
     r = sr.Recognizer()
@@ -62,12 +62,9 @@ def takeCommand():
         print("Recognizing...")
         query = r.recognize_google(audio, language='en-us')
         print(f"User said: {query}\n")
-        if not 'how are you' in query or 'who are you' in query or 'who created you' in query:
-            speak(choice(opening_text))
     except Exception as e:
         # print(e)
         print('Sorry, I could not understand. Could you please say that again?')
-        speak('Sorry, I could not understand. Could you please say that again?')
         return "None"
     return query
 
@@ -76,7 +73,8 @@ if __name__ == "__main__":
     while True:
         query = takeCommand().lower() # 
 
-        #logic for executing tasks based on query
+        # Client Interaction
+
         if "how are you" in query:
             speak("I'm fine sir, Glad you asked me.")
 
@@ -89,13 +87,45 @@ if __name__ == "__main__":
         elif "esdeath" in query:
             speak("At your service sir")
 
+        # Search Results
+
         elif 'wikipedia' in query:
+            x = query.split('wikipedia')
+            print(x[1])
+            if x[1] == " " or x[1] == "" or re.search(".*[a-zA-Z].*", x[1]):
+                sentencess = 10
+            else:
+                sentencess = int(x[1])
             speak('Searching Wikipedia...please wait')
-            query = query.replace("wikipedia", "")
-            results =  wikipedia.summary(query, sentences = 2)
-            speak("wikipedia says")
-            print(results)
+            results = wikipediaa(query, sentencess)
             speak(results)
+            
+        # Will work on it later got bored
+        # elif 'search' in query:
+        #     text = pyperclip.paste()
+        #     for j in search(text,num=10, stop=10, pause=2):
+        #         print(j)
+
+        elif 'ip address' in query:
+            ip_address = find_my_ip()
+            speak(f'Your IP Address is {ip_address}.\n For your convenience, I am printing it on the screen sir.')
+            print(f'Your IP Address is {ip_address}')
+
+        elif "trending movies" in query:
+            speak(f"Some of the trending movies are: {get_trending_movies()}")
+            speak("For your convenience, I am printing it on the screen sir.")
+            print(*get_trending_movies(), sep='\n')
+        
+        elif'open youtube' in query:
+            webbrowser.get('browcli').open("youtube.com")
+
+        elif 'open google' in query:
+            webbrowser.get('browcli').open('https://www.google.co.in/')
+
+        elif 'open stack overflow' in query:
+            webbrowser.get('browcli').open('https://stackoverflow.com/')
+
+        # Applications and system interactions
 
         elif 'open notepad' in query:
             open_notepad()
@@ -109,63 +139,71 @@ if __name__ == "__main__":
         elif 'open calculator' in query:
             open_calculator()
 
-        elif 'ip address' in query:
-            ip_address = find_my_ip()
-            speak(f'Your IP Address is {ip_address}.\n For your convenience, I am printing it on the screen sir.')
-            print(f'Your IP Address is {ip_address}')
-
-        elif "trending movies" in query:
-            speak(f"Some of the trending movies are: {get_trending_movies()}")
-            speak("For your convenience, I am printing it on the screen sir.")
-            print(*get_trending_movies(), sep='\n')
-        
-        elif'open youtube' in query:
-            webbrowser.get('chrome').open("youtube.com")
-
-        elif 'open google' in query:
-            webbrowser.get('chrome').open('https://www.google.co.in/')
-
-        elif 'open stack overflow' in query:
-            webbrowser.get('chrome').open('https://stackoverflow.com/')
-
-
-        elif 'play music'in query:
-            music_dir = "E:\Music"
-            songs = os.listdir(music_dir)
-            print(songs)
-            os.startfile(os.path.join(music_dir, songs[0]))
-
-        elif 'the time' in query:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f"Sir, the time is {strTime}")
-
         elif 'open code' in query:
-            codePath = "C:\\Users\\Baali\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            codePath = "C:\\Users\\DORTROX\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
 
         elif 'turn off' in query:
             speak("Thanks you for using esdeath Sir")
             exit()
+
         elif 'shutdown laptop' in query:
             speak("Hope you have a good day sir")
             speak("Shutting down your laptop")
             os.system("shutdown /s /t 1")
-        elif 'close edge' in query: #DONT JUDGE MOMENT
+
+        elif 'close edge' in query:
             speak("Closing edge")
             os.system("taskkill /f /im msedge.exe")
+
         elif 'save file' in query:
             x = query.split("as")
             x = x[1]
             speak('Saving file as' + x)
-            with open('C:/Users/dortr/OneDrive/Desktop/Python/'+ x +'.txt', 'w') as f:
+            with open(f'{stack_path}{x}.txt', 'w+') as f:
                 text = pyperclip.paste()
                 f.write(text)
-        elif 'sum of' in query:
-            x = query[7:]
-            x = x.split('and ')
-            print(x)
-            for i in x:
-                i = int(i)
-                summ += i
-            print(summ)
-            speak('It\'s ' + summ)
+
+        # Entertainment
+
+        elif 'play music'in query:
+            x = query.split('play music ')
+            music_dir = music_path
+            songs = os.listdir(music_dir)
+            print(songs)
+            i = 0
+            for song in songs:
+                if x[1] in song.lower():
+                    os.startfile(os.path.join(music_dir, song))
+                    i = 1
+                    break
+                else:
+                    pass
+            if i == 0:
+                speak("No song found")
+
+        elif 'the time' in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"Sir, the time is {strTime}")
+
+#Math functions (BASICS)
+
+        elif 'add' in query:
+            add = addition(query)
+            speak(f'It\'s {add}')
+            print(f'It\'s {add}')
+
+        elif 'subtract' in query:
+            subs = subtract(query)
+            speak(f'It\'s {subs}')
+            print(f'It\'s {subs}')
+
+        elif 'divide' in query:
+            div = subtract(query)
+            speak(f'It\'s {div}')
+            print(f'It\'s {div}')
+
+        elif 'multiply' in query:
+            mul = multiply(query)
+            speak(f'It\'s {mul}')
+            print(f'It\'s {mul}')
