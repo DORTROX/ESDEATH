@@ -1,4 +1,5 @@
 import os, pyttsx3, datetime, pyperclip, webbrowser, json, re
+from os import system, name
 from googlesearch import search
 import speech_recognition as sr
 from random import choice
@@ -70,6 +71,17 @@ def takeCommand():
 if __name__ == "__main__":
     wishMe()
     while True:
+        print("""
+   ▄████████    ▄████████ ████████▄     ▄████████    ▄████████     ███        ▄█    █▄    
+  ███    ███   ███    ███ ███   ▀███   ███    ███   ███    ███ ▀█████████▄   ███    ███   
+  ███    █▀    ███    █▀  ███    ███   ███    █▀    ███    ███    ▀███▀▀██   ███    ███   
+ ▄███▄▄▄       ███        ███    ███  ▄███▄▄▄       ███    ███     ███   ▀  ▄███▄▄▄▄███▄▄ 
+▀▀███▀▀▀     ▀███████████ ███    ███ ▀▀███▀▀▀     ▀███████████     ███     ▀▀███▀▀▀▀███▀  
+  ███    █▄           ███ ███    ███   ███    █▄    ███    ███     ███       ███    ███   
+  ███    ███    ▄█    ███ ███   ▄███   ███    ███   ███    ███     ███       ███    ███   
+  ██████████  ▄████████▀  ████████▀    ██████████   ███    █▀     ▄████▀     ███    █▀    
+                            Dev : D O R T R O 乂\n\n                                                                        
+        """)
         query = takeCommand().lower() # 
 
         # Client Interaction
@@ -206,3 +218,7 @@ if __name__ == "__main__":
             mul = multiply(query)
             speak(f'It\'s {mul}')
             print(f'It\'s {mul}')
+        if name == 'nt':
+            _ = system('cls')
+        else:
+            _ = system('clear')
