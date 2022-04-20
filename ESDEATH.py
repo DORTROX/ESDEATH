@@ -102,7 +102,6 @@ if __name__ == "__main__":
 
         elif 'wikipedia' in query:
             x = query.split('wikipedia')
-            print(x[1])
             if x[1] == " " or x[1] == "" or re.search(".*[a-zA-Z].*", x[1]):
                 sentencess = 10
             else:
