@@ -4,6 +4,7 @@ One day i thought "Let's start something cool"
 And that's it, that's all i thought to start a great project duh.
 
 # ESDEATH:
+![image](https://user-images.githubusercontent.com/78467470/164252194-c1e13c6e-3567-48ba-964d-352182801e7f.png)
 
 Esdeath is light weight voice assistant or you can say there is not much processing going on, anyways its completely handful for a dev as im only adding things i want as a dev myself
 
