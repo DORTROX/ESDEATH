@@ -22,7 +22,6 @@ webbrowser.get('browcli')
 
 #Defining some important vars
 GreetingPro = ['How can i help you today?', 'How can i assist you?']
-from openings import opening_text
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')

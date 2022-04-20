@@ -1,2 +1,0 @@
- edge' in query: #DONT JUDGE MOMENT
-            speak("Closing edge")
