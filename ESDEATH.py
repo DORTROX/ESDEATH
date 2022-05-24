@@ -6,6 +6,7 @@ from random import choice
 from RUNS.os_operators import *
 from RUNS.es_operators import *
 from RUNS.math import *
+from RUNS.chibaku import chibaku
 
 #Defining Config
 Obj = open('config.json')
@@ -26,7 +27,6 @@ GreetingPro = ['How can i help you today?', 'How can i assist you?']
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-# print(voices[0].id)
 engine.setProperty('voice', voices[0].id)
 
 
@@ -217,6 +217,10 @@ if __name__ == "__main__":
             mul = multiply(query)
             speak(f'It\'s {mul}')
             print(f'It\'s {mul}')
+#TROLLAGE
+        elif 'spam' in query:
+            chibaku()
+
         if name == 'nt':
             _ = system('cls')
         else:
