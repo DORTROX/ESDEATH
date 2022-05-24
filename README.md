@@ -1,3 +1,16 @@
+<div id="header" align="center">
+  <img src="https://user-images.githubusercontent.com/78467470/168476573-b0df52f2-c02b-4c41-abc2-46764bc7375c.png" width="100"/>
+  <h1>ESDEATH</h1><h2>A Voice Assistant for Developers(On Progress)</h2>
+
+<img src="https://64.media.tumblr.com/21d942317bc9da9ae85a47965c5eb1f1/tumblr_ncpjgmNUul1tfluxko1_500.gif"/>
+
+
+  `D O R T R O 乂#5516`
+
+</div>
+
+
+
 # STORY
 
 One day i thought "Let's start something cool"
@@ -8,12 +21,36 @@ And that's it, that's all i thought to start a great project duh.
 
 Esdeath is light weight voice assistant or you can say there is not much processing going on, anyways its completely handful for a dev as im only adding things i want as a dev myself
 
-# Configuration
+# Installation & Configuration 
 
-![image](https://user-images.githubusercontent.com/78467470/164249640-5ad2698f-e640-4fdf-9c30-44601a6abe29.png)
+- Considering you have `Python` insalled in your system.
 
-stack_path : A folder where your copied text will be stored
+  - Open **Terminal**
 
-Browser : Incase you use a diff browser paste its target (origin) here
+    - type <br> `pip install pyttsx3`,`pip install googlesearch`, `pip install SpeechRecognition`
+    - After Installation close the window
 
-music_path: Path to your music folder
+<br>
+
+  - Open **Config.json** and modify
+    <table>
+        <tr>
+            <th>Fields</th>
+            <th>Changes</th>
+        </tr>
+        <tr>
+            <td>stack_path</td>
+            <td>Dir path for copy code fucntion</td>
+        </tr>
+        <tr>
+            <td>Broswer</td>
+            <td>Path for your browser</td>
+        </tr>
+        <tr>
+            <td>music_path</td>
+            <td>Path for your music folder</td>
+        </tr>
+    </table>
+
+
+> As you may already know their are many issue with voice recognition but in future if i get time i will fix them all of
