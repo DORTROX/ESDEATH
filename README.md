@@ -53,4 +53,4 @@ Esdeath is light weight voice assistant or you can say there is not much process
     </table>
 
 
-> As you may already know their are many issue with voice recognition but in future if i get time i will fix them all of
+> As you may already know there are many issue with voice recognition but in future if i get time i will fix them all of
